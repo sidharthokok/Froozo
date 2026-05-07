@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FROOZO Café — Thane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  :root {
+    --cream: #FFF8F0;
+    --deep: #1A0A00;
+    --mango: #FF8C00;
+    --berry: #C0006E;
+    --lime: #00A86B;
+    --frost: #E8F5FF;
+    --gold: #FFD700;
+    --text: #1A0A00;
+    --mid: #6B4226;
+  }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+ 
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 1.2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(255,248,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(192,0,110,0.15);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 0.08em;
+    color: var(--deep);
+    text-decoration: none;
+    position: relative;
+  }
+  .nav-logo span { color: var(--mango); }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--deep);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--berry); }
+  .nav-cta {
+    background: var(--berry);
+    color: white !important;
+    padding: 0.6rem 1.4rem !important;
+    border-radius: 100px;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--deep) !important; transform: scale(1.04); }
+ 
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--deep);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(255,140,0,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(192,0,110,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 85% 15%, rgba(0,168,107,0.15) 0%, transparent 60%);
+  }
+  .hero-blobs {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+  .blob-1 { width: 500px; height: 500px; background: var(--mango); top: -100px; right: -100px; animation-delay: 0s; }
+  .blob-2 { width: 380px; height: 380px; background: var(--berry); bottom: -80px; left: 10%; animation-delay: -4s; }
+  .blob-3 { width: 300px; height: 300px; background: var(--lime); top: 40%; right: 30%; animation-delay: -7s; }
+  @keyframes drift {
+    0% { transform: translate(0,0) scale(1); }
+    100% { transform: translate(30px, 20px) scale(1.07); }
+  }
+ 
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 4rem;
+    max-width: 700px;
+  }
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--mango);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--mango);
+  }
+  .hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 0.95;
+    color: white;
+    margin-bottom: 1.5rem;
+  }
+  .hero-h1 .accent { color: var(--mango); font-style: italic; }
+  .hero-h1 .accent2 { color: var(--berry); }
+  .hero-sub {
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.72);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-primary {
+    background: var(--mango);
+    color: var(--deep);
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255,140,0,0.4); }
+  .btn-ghost {
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    font-weight: 400;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.08); }
+  .hero-rating {
+    position: absolute;
+    bottom: 3rem;
+    right: 4rem;
+    z-index: 2;
+    color: white;
+    text-align: right;
+  }
+  .rating-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--mango);
+  }
+  .stars { color: var(--gold); font-size: 1.2rem; margin-bottom: 0.2rem; }
+  .rating-sub { font-size: 0.78rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; }
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 3rem;
+    left: 4rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+    animation: scrollpulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollpulse { 0%,100%{opacity:0.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+ 
+  /* ---- MARQUEE ---- */
+  .marquee-band {
+    background: var(--berry);
+    padding: 0.85rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-flex;
+    gap: 2rem;
+    animation: marquee 28s linear infinite;
+  }
+  @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  .marquee-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.18em;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .marquee-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.5); }
+ 
+  /* ---- SECTIONS SHARED ---- */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--berry);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::before { content:''; display:block; width:24px; height:1px; background:var(--berry); }
+  .section-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--deep);
+  }
+  .section-h2 em { font-style: italic; color: var(--berry); }
+ 
+  /* ---- EXPERIENCE ---- */
+  .experience {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .exp-text { }
+  .exp-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--mid);
+    margin-top: 1.5rem;
+    max-width: 480px;
+  }
+  .exp-features {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .exp-feat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.92rem;
+    font-weight: 400;
+    color: var(--mid);
+  }
+  .feat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .feat-icon.mango { background: rgba(255,140,0,0.12); }
+  .feat-icon.berry { background: rgba(192,0,110,0.1); }
+  .feat-icon.lime { background: rgba(0,168,107,0.1); }
+  .exp-visual {
+    position: relative;
+  }
+  .exp-card-main {
+    background: var(--deep);
+    border-radius: 28px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .exp-card-main::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 80% 20%, rgba(255,140,0,0.25) 0%, transparent 60%);
+  }
+  .exp-card-text {
+    position: relative;
+    z-index: 1;
+  }
+  .card-big-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 7rem;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    position: absolute;
+    bottom: 1rem;
+    right: 1.5rem;
+  }
+  .women-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(192,0,110,0.15);
+    border: 1px solid rgba(192,0,110,0.3);
+    border-radius: 100px;
+    padding: 0.4rem 1rem;
+    font-size: 0.78rem;
+    color: #C0006E;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+  .exp-card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .stat-box {
+    background: rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 1.2rem;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--mango);
+  }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-top: 0.2rem; letter-spacing: 0.06em; }
+  .floating-tag {
+    position: absolute;
+    background: white;
+    border-radius: 14px;
+    padding: 0.8rem 1.2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .floating-tag.t1 { bottom: -1.5rem; left: -2rem; }
+  .floating-tag.t2 { top: 2rem; right: -2rem; }
+ 
+  /* ---- MENU ---- */
+  .menu-section { background: white; }
+  .menu-header { text-align: center; margin-bottom: 3.5rem; }
+  .menu-cats {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  .cat-btn {
+    padding: 0.5rem 1.4rem;
+    border-radius: 100px;
+    border: 1.5px solid rgba(26,10,0,0.18);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--mid);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .cat-btn.active, .cat-btn:hover {
+    background: var(--deep);
+    color: white;
+    border-color: var(--deep);
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .menu-card {
+    border-radius: 22px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+  .menu-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+  .menu-card-img {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .menu-card-img.frosty { background: linear-gradient(135deg, #e8f5ff 0%, #b3d9ff 100%); }
+  .menu-card-img.warm { background: linear-gradient(135deg, #fff3e0 0%, #ffcc80 100%); }
+  .menu-card-img.tropical { background: linear-gradient(135deg, #e8f5e9 0%, #a5d6a7 100%); }
+  .menu-card-img.indulgent { background: linear-gradient(135deg, #fce4ec 0%, #f48fb1 100%); }
+  .menu-card-img.savory { background: linear-gradient(135deg, #fff8e1 0%, #ffe082 100%); }
+  .menu-card-img.sip { background: linear-gradient(135deg, #ede7f6 0%, #ce93d8 100%); }
+  .menu-card-body { background: white; padding: 1.3rem; border-top: none; }
+  .menu-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--berry);
+    margin-bottom: 0.4rem;
+  }
+  .menu-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 0.4rem;
+  }
+  .menu-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.5; margin-bottom: 0.75rem; }
+  .menu-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--mango);
+  }
+  .menu-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--berry);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+  }
+ 
+  /* ---- VIBE ---- */
+  .vibe-section {
+    background: var(--deep);
+    position: relative;
+    overflow: hidden;
+  }
+  .vibe-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 0% 100%, rgba(192,0,110,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 100% 0%, rgba(255,140,0,0.15) 0%, transparent 60%);
+  }
+  .vibe-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .vibe-text .section-label { color: var(--mango); }
+  .vibe-text .section-label::before { background: var(--mango); }
+  .vibe-text .section-h2 { color: white; }
+  .vibe-text p { color: rgba(255,255,255,0.6); font-size: 1.05rem; line-height: 1.8; margin-top: 1.5rem; }
+  .hours-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.9rem;
+  }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-day { color: rgba(255,255,255,0.5); letter-spacing: 0.05em; }
+  .hours-time { color: white; font-weight: 500; }
+  .open-now {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--lime);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .dot-green { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.3)} }
+  .vibe-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+  .photo-card {
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    position: relative;
+  }
+  .photo-card.tall { grid-row: span 2; min-height: 320px; }
+  .photo-card.short { min-height: 140px; }
+  .photo-card.p1 { background: linear-gradient(135deg, #1a0a00, #4a1a00); }
+  .photo-card.p2 { background: linear-gradient(135deg, #3d0030, #800060); }
+  .photo-card.p3 { background: linear-gradient(135deg, #002d1a, #005530); }
+  .photo-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+ 
+  /* ---- REVIEWS ---- */
+  .reviews-section { background: var(--cream); }
+  .reviews-header { text-align: center; max-width: 600px; margin: 0 auto 3.5rem; }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .review-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    transition: transform 0.3s;
+    border: 1px solid rgba(26,10,0,0.06);
+  }
+  .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .review-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; }
+  .review-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--deep);
+    margin-bottom: 1.5rem;
+  }
+  .reviewer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .reviewer-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+    flex-shrink: 0;
+  }
+  .a1 { background: var(--mango); }
+  .a2 { background: var(--berry); }
+  .a3 { background: var(--lime); }
+  .a4 { background: #7B68EE; }
+  .a5 { background: #FF6B6B; }
+  .a6 { background: #00BCD4; }
+  .reviewer-name { font-size: 0.9rem; font-weight: 500; color: var(--deep); }
+  .reviewer-date { font-size: 0.75rem; color: var(--mid); }
+  .google-badge {
+    text-align: center;
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--mid);
+    font-size: 0.85rem;
+  }
+  .google-g {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #4285F4;
+  }
+ 
+  /* ---- CTA BAND ---- */
+  .cta-band {
+    background: var(--mango);
+    padding: 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-band::before {
+    content: 'FROOZO';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15rem;
+    color: rgba(255,255,255,0.1);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+  }
+  .cta-band h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 900;
+    color: var(--deep);
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0.75rem;
+  }
+  .cta-band p {
+    color: rgba(26,10,0,0.65);
+    font-size: 1rem;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2rem;
+  }
+  .cta-band .btn-dark {
+    background: var(--deep);
+    color: white;
+    padding: 1rem 2.2rem;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .cta-band .btn-dark:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(26,10,0,0.3); }
+ 
+  /* ---- LOCATION ---- */
+  .location-section { background: white; }
+  .location-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .location-details { }
+  .location-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.8rem;
+  }
+  .loc-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(192,0,110,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .loc-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--berry);
+    margin-bottom: 0.25rem;
+  }
+  .loc-value {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--mid);
+  }
+  .map-placeholder {
+    background: linear-gradient(135deg, #e8f4f8, #d0e8f0);
+    border-radius: 24px;
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .map-pin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .map-pin-icon { font-size: 3rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); }
+  .map-pin-label {
+    background: white;
+    border-radius: 100px;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--deep);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .map-btn {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--deep);
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .map-btn:hover { background: var(--berry); }
+ 
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--deep);
+    color: rgba(255,255,255,0.5);
+    padding: 3rem 4rem;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: white;
+    letter-spacing: 0.08em;
+  }
+  .footer-logo span { color: var(--mango); }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: white; }
+  .footer-copy { font-size: 0.78rem; }
+  .women-owned {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: rgba(192,0,110,0.7);
+    font-weight: 500;
+  }
+ 
+  /* ---- SCROLL ANIMATION ---- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.32s; }
+ 
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero-content { padding: 0 1.5rem; }
+    .hero-rating { right: 1.5rem; bottom: 2rem; }
+    .hero-scroll-hint { display: none; }
+    .experience, .vibe-inner, .location-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .menu-grid, .reviews-grid { grid-template-columns: 1fr 1fr; }
+    .cta-band { padding: 3rem 1.5rem; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+  }
+ 
+  @media (max-width: 600px) {
+    .menu-grid, .reviews-grid { grid-template-columns: 1fr; }
+    .hero-h1 { font-size: 3.5rem; }
+  }
+</style>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="#">FROO<span>ZO</span></a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#experience">About</a></li>
+    <li><a href="#vibe">Hours</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#location">Visit Us</a></li>
+    <li><a href="#order" class="nav-cta">Order Online</a></li>
+  </ul>
+</nav>
+ 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Thane's Coolest Destination</div>
+    <h1 class="hero-h1">
+      Life's Better<br>
+      <span class="accent">Frozen</span> &amp;<br>
+      <span class="accent2">Froozy.</span>
+    </h1>
+    <p class="hero-sub">Craft frozen desserts, gourmet pizzas, and curated cocktails — served with love at Dhokali, Thane West. Open until midnight.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">Explore Menu ↓</a>
+      <a href="#order" class="btn-ghost">Order Online</a>
+    </div>
+  </div>
+  <div class="hero-rating">
+    <div class="rating-big">4.8</div>
+    <div class="stars">★★★★★</div>
+    <div class="rating-sub">30 HAPPY CUSTOMERS</div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+ 
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Frozen Desserts <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Gourmet Pizza <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Cocktails &amp; Mocktails <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Women-Owned <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Dine-In &amp; Delivery <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Open Till Midnight <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Thane West, Dhokali <span class="marquee-dot"></span></span>
+    <span class="marquee-item">₹200 – ₹400 <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Frozen Desserts <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Gourmet Pizza <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Cocktails &amp; Mocktails <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Women-Owned <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Dine-In &amp; Delivery <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Open Till Midnight <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Thane West, Dhokali <span class="marquee-dot"></span></span>
+    <span class="marquee-item">₹200 – ₹400 <span class="marquee-dot"></span></span>
+  </div>
+</div>
+ 
+<!-- EXPERIENCE / ABOUT -->
+<section id="experience">
+  <div class="experience">
+    <div class="exp-text reveal">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-h2">Where Every<br>Bite is an <em>Adventure</em></h2>
+      <p>FROOZO Café is Thane's premier frozen dessert destination, blending global flavors with local love. Nestled in Dhokali, we serve handcrafted frozen delights, crispy pizzas, and vibrant cocktails in a space designed to make you linger.</p>
+      <div class="exp-features">
+        <div class="exp-feat">
+          <div class="feat-icon mango">🍦</div>
+          Handcrafted frozen desserts made fresh daily
+        </div>
+        <div class="exp-feat">
+          <div class="feat-icon berry">🍕</div>
+          Wood-fired style gourmet pizzas &amp; burgers
+        </div>
+        <div class="exp-feat">
+          <div class="feat-icon lime">🍹</div>
+          Signature cocktails, mocktails &amp; chocolate specials
+        </div>
+      </div>
+    </div>
+    <div class="exp-visual reveal reveal-delay-2">
+      <div class="exp-card-main">
+        <div class="exp-card-text">
+          <div class="women-badge">♀ Women-Owned Business</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:white;line-height:1.2;margin-bottom:0.5rem;">A Café Born From Passion</div>
+          <div style="font-size:0.88rem;color:rgba(255,255,255,0.5);line-height:1.6;">Founded with a vision to bring premium frozen desserts and café culture to Thane, FROOZO is more than a café — it's a community.</div>
+          <div class="exp-card-stats">
+            <div class="stat-box">
+              <div class="stat-num">4.8★</div>
+              <div class="stat-label">Google Rating</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">30+</div>
+              <div class="stat-label">Happy Reviews</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">Late</div>
+              <div class="stat-label">Open till 12 AM</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">₹200</div>
+              <div class="stat-label">Starting Price</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-big-num">★</div>
+      </div>
+      <div class="floating-tag t1">🚗 Drive-through available</div>
+      <div class="floating-tag t2">📦 No-contact delivery</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- MENU -->
+<section id="menu" class="menu-section">
+  <div class="menu-header reveal">
+    <div class="section-label" style="justify-content:center;">What We Serve</div>
+    <h2 class="section-h2" style="text-align:center;">The <em>Menu</em></h2>
+    <div class="menu-cats">
+      <button class="cat-btn active">All</button>
+      <button class="cat-btn">Frozen Treats</button>
+      <button class="cat-btn">Pizza</button>
+      <button class="cat-btn">Burgers</button>
+      <button class="cat-btn">Chocolate</button>
+      <button class="cat-btn">Cocktails</button>
+    </div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card reveal">
+      <div class="menu-card-img frosty">🍦</div>
+      <div class="menu-badge">Fan Fave</div>
+      <div class="menu-card-body">
+        <div class="menu-tag">Frozen Treats</div>
+        <div class="menu-name">Signature Froozo Sundae</div>
+        <div class="menu-desc">House-made ice cream, berry coulis, caramelized nuts, whipped cream tower</div>
+        <div class="menu-price">₹220</div>
+      </div>
+    </div>
+    <div class="menu-card reveal reveal-delay-1">
+      <div class="menu-card-img warm">🍕</div>
+      <div class="menu-card-body">
+        <div class="menu-tag">Pizza</div>
+        <div class="menu-name">Gourmet Wood-Style Pizza</div>
+        <div class="menu-desc">Thin-crust pizzas with premium toppings, house-blend sauce &amp; aged cheese</div>
+        <div class="menu-price">₹280</div>
+      </div>
+    </div>
+    <div class="menu-card reveal reveal-delay-2">
+      <div class="menu-card-img indulgent">🍫</div>
+      <div class="menu-badge">Bestseller</div>
+      <div class="menu-card-body">
+        <div class="menu-tag">Chocolate</div>
+        <div class="menu-name">Midnight Chocolate Fondue</div>
+        <div class="menu-desc">Dark Belgian chocolate, fresh fruits, marshmallows &amp; honeycomb</div>
+        <div class="menu-price">₹320</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <div class="menu-card-img tropical">🥤</div>
+      <div class="menu-card-body">
+        <div class="menu-tag">Frozen Treats</div>
+        <div class="menu-name">Tropical Froozo Shake</div>
+        <div class="menu-desc">Mango, passionfruit &amp; coconut blended with premium ice cream, topped with cream</div>
+        <div class="menu-price">₹199</div>
+      </div>
+    </div>
+    <div class="menu-card reveal reveal-delay-1">
+      <div class="menu-card-img savory">🍔</div>
+      <div class="menu-card-body">
+        <div class="menu-tag">Burgers</div>
+        <div class="menu-name">Froozo Signature Burger</div>
+        <div class="menu-desc">Smash-style patty, caramelized onions, special Froozo sauce, brioche bun</div>
+        <div class="menu-price">₹260</div>
+      </div>
+    </div>
+    <div class="menu-card reveal reveal-delay-2">
+      <div class="menu-card-img sip">🍹</div>
+      <div class="menu-badge">New</div>
+      <div class="menu-card-body">
+        <div class="menu-tag">Cocktails &amp; Mocktails</div>
+        <div class="menu-name">Froozo Signature Cocktail</div>
+        <div class="menu-desc">House-crafted spirits &amp; fresh juices, garnished beautifully. Mocktail version available</div>
+        <div class="menu-price">₹350</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- VIBE / HOURS -->
+<section id="vibe" class="vibe-section">
+  <div class="vibe-inner">
+    <div class="vibe-text reveal">
+      <div class="section-label">Come Visit</div>
+      <h2 class="section-h2">The <em>Perfect</em><br>Evening Awaits</h2>
+      <p>Whether it's a late-night dessert craving, a weekend date, or a family outing — FROOZO is the spot. Warm lights, cool vibes, great food.</p>
+      <div class="hours-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+          <span style="color:rgba(255,255,255,0.7);font-size:0.82rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">Opening Hours</span>
+          <span class="open-now"><span class="dot-green"></span> Open Now</span>
+        </div>
+        <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time">11:00 AM – 12:00 AM</span></div>
+        <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">10:00 AM – 12:00 AM</span></div>
+        <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">10:00 AM – 12:00 AM</span></div>
+      </div>
+      <div style="display:flex;gap:0.75rem;margin-top:1.5rem;flex-wrap:wrap;">
+        <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:0.45rem 1rem;font-size:0.78rem;color:rgba(255,255,255,0.6);">🍽️ Dine-In</span>
+        <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:0.45rem 1rem;font-size:0.78rem;color:rgba(255,255,255,0.6);">🚗 Drive-Through</span>
+        <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:0.45rem 1rem;font-size:0.78rem;color:rgba(255,255,255,0.6);">📦 Delivery</span>
+      </div>
+    </div>
+    <div class="vibe-photos reveal reveal-delay-2">
+      <div class="photo-card tall p1">
+        🍦
+        <div class="photo-overlay">Handcrafted Sundaes</div>
+      </div>
+      <div class="photo-card short p2">
+        🍕
+        <div class="photo-overlay">Gourmet Pizza</div>
+      </div>
+      <div class="photo-card short p3">
+        🍹
+        <div class="photo-overlay">Cocktails &amp; Vibes</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- REVIEWS -->
+<section id="reviews" class="reviews-section">
+  <div class="reviews-header reveal">
+    <div class="section-label" style="justify-content:center;">What People Say</div>
+    <h2 class="section-h2" style="text-align:center;">Loved by <em>Thane</em></h2>
+    <p style="margin-top:1rem;color:var(--mid);font-size:0.95rem;line-height:1.7;">4.8 stars on Google — here's what our guests are saying about their FROOZO experience.</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Best frozen desserts in Thane by far! The ambience is absolutely stunning and the staff is incredibly warm. We stayed till midnight and didn't want to leave."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar a1">PR</div>
+        <div>
+          <div class="reviewer-name">Priya R.</div>
+          <div class="reviewer-date">2 months ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-1">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The chocolate fondue is out of this world! Loved the drive-through option too — perfect for a quick midnight dessert run. FROOZO is now our weekly tradition."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar a2">AM</div>
+        <div>
+          <div class="reviewer-name">Aman M.</div>
+          <div class="reviewer-date">1 month ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-2">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"So happy to see a women-owned café thriving in Dhokali. The cocktails are creative and the pizza is crispy perfection. Must-visit for anyone in Thane West!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar a3">SK</div>
+        <div>
+          <div class="reviewer-name">Sneha K.</div>
+          <div class="reviewer-date">3 weeks ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Brought my whole family here for dessert after dinner — everyone was blown away. The Froozo sundae is massive and so beautifully presented. Will 100% return."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar a4">RD</div>
+        <div>
+          <div class="reviewer-name">Rohit D.</div>
+          <div class="reviewer-date">5 weeks ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-1">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Amazing place near Amber International School. The no-contact delivery is super convenient. Fresh, clean, and delicious every single time. Froozo has set a new standard!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar a5">NP</div>
+        <div>
+          <div class="reviewer-name">Neha P.</div>
+          <div class="reviewer-date">1 month ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-2">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The tropical shake is dangerously good — I've ordered it five times already. Love that it's open so late. Finally a proper café experience in Thane West. Absolutely love FROOZO!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar a6">VT</div>
+        <div>
+          <div class="reviewer-name">Vikram T.</div>
+          <div class="reviewer-date">2 months ago</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="google-badge reveal">
+    <div class="google-g">G</div>
+    <span>4.8 · 30 reviews on Google Maps</span>
+  </div>
+</section>
+ 
+<!-- CTA BAND -->
+<div id="order" class="cta-band">
+  <h2>Craving Something <em style="font-style:italic;">Froozy?</em></h2>
+  <p>Order online for delivery, or drive-through for that midnight treat. We deliver happiness.</p>
+  <a href="https://froozocafe.com" target="_blank" class="btn-dark">Order Now at froozocafe.com →</a>
+</div>
+ 
+<!-- LOCATION -->
+<section id="location" class="location-section">
+  <div class="location-inner">
+    <div class="location-details reveal">
+      <div class="section-label">Find Us</div>
+      <h2 class="section-h2">Come Say<br><em>Hello</em></h2>
+      <div style="margin-top:2.5rem;">
+        <div class="location-item">
+          <div class="loc-icon">📍</div>
+          <div>
+            <div class="loc-label">Address</div>
+            <div class="loc-value">Shop No. 9, Sattya Vandan,<br>near Amber International School,<br>Dhokali, Thane West,<br>Thane, Maharashtra 400607</div>
+          </div>
+        </div>
+        <div class="location-item">
+          <div class="loc-icon">🕛</div>
+          <div>
+            <div class="loc-label">Hours</div>
+            <div class="loc-value">Open Daily · 11:00 AM – 12:00 AM<br><span style="color:var(--lime);font-weight:500;">● Open Now</span></div>
+          </div>
+        </div>
+        <div class="location-item">
+          <div class="loc-icon">💸</div>
+          <div>
+            <div class="loc-label">Price Range</div>
+            <div class="loc-value">₹200 – ₹400 per person</div>
+          </div>
+        </div>
+        <div class="location-item">
+          <div class="loc-icon">🌐</div>
+          <div>
+            <div class="loc-label">Website</div>
+            <div class="loc-value"><a href="https://froozocafe.com" style="color:var(--berry);text-decoration:none;font-weight:500;">froozocafe.com</a></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://maps.google.com/?q=Froozo+Cafe+Thane" target="_blank" class="btn-primary" style="display:inline-flex;">
+          Get Directions →
+        </a>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="map-placeholder">
+        <div class="map-pin">
+          <div class="map-pin-icon">📍</div>
+          <div class="map-pin-label">FROOZO Café · Dhokali, Thane West</div>
+        </div>
+        <a href="https://maps.google.com/?q=Froozo+Cafe+Thane" target="_blank" class="map-btn">Open in Maps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">FROO<span>ZO</span> Café</div>
+      <div style="margin-top:0.5rem;font-size:0.8rem;">Dhokali, Thane West · Open Till Midnight</div>
+      <div class="women-owned" style="margin-top:0.5rem;">♀ Proudly Women-Owned</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#experience">About</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#location">Visit Us</a></li>
+      <li><a href="https://froozocafe.com" target="_blank">Order Online</a></li>
+    </ul>
+    <div class="footer-copy">© 2025 FROOZO Café. Thane, Maharashtra.</div>
+  </div>
+</footer>
+ 
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+ 
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+ 
+  // Menu category buttons (visual only)
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
